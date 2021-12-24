@@ -1,7 +1,15 @@
 # AdjectivestVB
-VB.NET 2010 Conversion of Samuel Emaus Adjectivest.  Data from this below:
+VB.NET 2010 Ultimate Conversion of Samuel Emaus Adjectivest.  
 
-# Adjectivest
+This is a simple Windows Form project.  Run it with Ctrl-F5, and hit the button.
+
+Tests have been written, which document how to use the code.  Coverage is set up in the solution also.
+
+The conversion was partly done automatically, so is fairly rough and ready.  It seems to work, but no guarantees.  I've added a few extra comments, plus a fix in GetInflectionType() to leSuffix processing. 
+
+The original readme is as follows:
+
+## Adjectivest
 
 This is a small library for inflecting Adjectives in English between their comparative, superlative, and base forms.
 

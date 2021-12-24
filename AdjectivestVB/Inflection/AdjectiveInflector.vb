@@ -26,7 +26,6 @@ Namespace Adjectivest
         Public Const leSuffix As String = "le"
         Public Const erSuffix As String = "er"
         Public Const ySuffix As String = "y"
-        Public Const ableSuffix As String = "able"
         Private Const basicComparative As String = "er"
         Private Const basicSuperlative As String = "est"
         Private Const pastParticipleEnding As String = "ed"
