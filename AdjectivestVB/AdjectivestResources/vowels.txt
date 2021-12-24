@@ -1,0 +1,15 @@
+AA,Short,odd
+AE,Short,at
+AH,Short,hut
+AO,Short,ought
+EH,Short,Ed
+IH,Short,it
+UH,Short,hood
+AW,Long,cow
+AY,Long,hide
+ER,Long,hurt
+IY,Long,eat
+OW,Long,oat
+OY,Long,toy
+UW,Long,two
+EY,Long,ate
