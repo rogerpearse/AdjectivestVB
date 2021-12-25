@@ -1,5 +1,5 @@
 # AdjectivestVB
-VB.NET 2010 Ultimate Conversion of Samuel Emaus Adjectivest.  
+VB.NET 2010 Ultimate Conversion of Samuel Emaus Adjectivest.  https://github.com/samuelemaus/Adjectivest
 
 This is a simple Windows Form project.  Run it with Ctrl-F5, and hit the button.
 
