@@ -329,19 +329,28 @@ Namespace Adjectivest
                 Select Case firstVowel.Length
                     Case VowelLength.Short
 
+                        ' This is the original code, which should return true for "tall" but in fact returns false.
+                        ' It also fails for rich and other digraphs
+                        'Dim endsInNonDigraphicDualConsonant As Boolean = TypeOf wordObj.GetPenultimatePhoneme() Is ConsonantPhoneme
+
+                        ' A digraph is two letters that combine together to correspond to one sound (phoneme). 
+                        ' Examples of consonant digraphs are ‘ch, sh, th, ng’.
+
+                        Dim lastPhoneme As Phoneme = wordObj.GetLastPhoneme()
                         Dim penultimateConsonant As Phoneme = wordObj.GetPenultimatePhoneme()
-                        ' This is the original code, which should return true for "tall" but in fact returns false
-                        Dim endsInNonDigraphicDualConsonant As Boolean = False '= TypeOf penultimateConsonant Is ConsonantPhoneme
 
                         ' Rough and ready fix for "tall"
+                        Dim endsInNonDigraphicDualConsonant As Boolean = False
                         Dim lastChar As Char = word(word.Length - 1)
                         Dim penultimateChar As Char = word(word.Length - 2)
                         If lastChar = penultimateChar Then
                             endsInNonDigraphicDualConsonant = True
                         End If
 
-                        If lastConsonant.DoubleOnShortVowel AndAlso endsInNonDigraphicDualConsonant = False Then
-                            ' Double last consonant, but not if already doubled
+                        If lastConsonant.DoubleOnShortVowel _
+                            And Not (TypeOf lastPhoneme Is ConsonantPhoneme And lastConsonant.Formation = ConsonantFormation.Digraph) _
+                            AndAlso endsInNonDigraphicDualConsonant = False Then
+                            ' Double last consonant, but not if already doubled, or a digraph
                             finalValue += lastChar
                             finalValue += suffix
                         Else

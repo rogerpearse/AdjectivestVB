@@ -94,6 +94,15 @@ Public Class TopLevelTest
     <TestMethod()>
     Public Sub TestOneSyllableHandling()
         Assert.AreEqual("fat|fatter|fattest", inflector.GetAdjectiveInflections("fat", AdjectiveForm.Base))
+        Assert.AreEqual("slim|slimmer|slimmest", inflector.GetAdjectiveInflections("slim", AdjectiveForm.Base))
+        Assert.AreEqual("wide|wider|widest", inflector.GetAdjectiveInflections("wide", AdjectiveForm.Base))
+    End Sub
+
+    <TestMethod()>
+    Public Sub TestOneSyllableEndingInDigraph()
+        Assert.AreEqual("rich|richer|richest", inflector.GetAdjectiveInflections("rich", AdjectiveForm.Base))
+        Assert.AreEqual("lush|lusher|lushest", inflector.GetAdjectiveInflections("lush", AdjectiveForm.Base))
+        Assert.AreEqual("sick|sicker|sickest", inflector.GetAdjectiveInflections("sick", AdjectiveForm.Base))
     End Sub
 
     <TestMethod()>
@@ -107,6 +116,13 @@ Public Class TopLevelTest
         Assert.AreEqual("simple|simpler|simplest", inflector.GetAdjectiveInflections("simple", AdjectiveForm.Base))
         Assert.AreEqual("busy|busier|busiest", inflector.GetAdjectiveInflections("busy", AdjectiveForm.Base))
         Assert.AreEqual("tilted|more tilted|most tilted", inflector.GetAdjectiveInflections("tilted", AdjectiveForm.Base))
+    End Sub
+
+    <TestMethod()>
+    Public Sub TestTwoSyllableExceptions()
+        ' TODO quiet and narrow do not work.
+        'Assert.AreEqual("quiet|quieter|quietest", inflector.GetAdjectiveInflections("quiet", AdjectiveForm.Base))
+        'Assert.AreEqual("narrow|narrower|narrowest", inflector.GetAdjectiveInflections("narrow", AdjectiveForm.Base))
     End Sub
 
     <TestMethod()>
