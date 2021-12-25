@@ -1,9 +1,12 @@
 bad,worse,worst
 far,farther,farthest
+fun,more fun,most fun
 good,better,best
 hind,hinder,hindmost
 ill,worse,worst
 less,lesser,least
-well,better,best
+little,less,least
+much,more,most
 stupid,stupider,stupidest
-fun,more fun,most fun
+well,better,best
+

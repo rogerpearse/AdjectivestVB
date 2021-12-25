@@ -322,18 +322,27 @@ Namespace Adjectivest
             If wordObj.LastSyllableType = PhonemeType.Consonant Then
                 endsInConsonant = True
             End If
-            Dim cp As ConsonantPhoneme = Nothing
 
             If endsInConsonant Then
                 Dim lastConsonant As ConsonantPhoneme = CType(wordObj.GetLastPhoneme(), ConsonantPhoneme)
 
                 Select Case firstVowel.Length
                     Case VowelLength.Short
-                        Dim endsInNonDigraphicDualConsonant As Boolean = TypeOf wordObj.GetPenultimatePhoneme() Is ConsonantPhoneme
 
-                        If lastConsonant.DoubleOnShortVowel AndAlso Not endsInNonDigraphicDualConsonant Then
-                            Dim last = word(word.Length - 1)
-                            finalValue += last
+                        Dim penultimateConsonant As Phoneme = wordObj.GetPenultimatePhoneme()
+                        ' This is the original code, which should return true for "tall" but in fact returns false
+                        Dim endsInNonDigraphicDualConsonant As Boolean = False '= TypeOf penultimateConsonant Is ConsonantPhoneme
+
+                        ' Rough and ready fix for "tall"
+                        Dim lastChar As Char = word(word.Length - 1)
+                        Dim penultimateChar As Char = word(word.Length - 2)
+                        If lastChar = penultimateChar Then
+                            endsInNonDigraphicDualConsonant = True
+                        End If
+
+                        If lastConsonant.DoubleOnShortVowel AndAlso endsInNonDigraphicDualConsonant = False Then
+                            ' Double last consonant, but not if already doubled
+                            finalValue += lastChar
                             finalValue += suffix
                         Else
                             finalValue = word & suffix

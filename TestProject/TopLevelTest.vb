@@ -90,4 +90,35 @@ Public Class TopLevelTest
         Assert.AreEqual("Sad|Sadder|Saddest", inflector.GetAdjectiveInflections("Sad"))
         Assert.AreEqual("SAD|SADDer|SADDest", inflector.GetAdjectiveInflections("SAD"))
     End Sub
+
+    <TestMethod()>
+    Public Sub TestOneSyllableHandling()
+        Assert.AreEqual("fat|fatter|fattest", inflector.GetAdjectiveInflections("fat", AdjectiveForm.Base))
+    End Sub
+
+    <TestMethod()>
+    Public Sub TestOneSyllableWithDoubledConsonantHandling()
+        Assert.AreEqual("tall|taller|tallest", inflector.GetAdjectiveInflections("tall"))
+    End Sub
+
+    <TestMethod()>
+    Public Sub TestTwoSyllableHandling()
+        Assert.AreEqual("happy|happier|happiest", inflector.GetAdjectiveInflections("happy", AdjectiveForm.Base))
+        Assert.AreEqual("simple|simpler|simplest", inflector.GetAdjectiveInflections("simple", AdjectiveForm.Base))
+        Assert.AreEqual("busy|busier|busiest", inflector.GetAdjectiveInflections("busy", AdjectiveForm.Base))
+        Assert.AreEqual("tilted|more tilted|most tilted", inflector.GetAdjectiveInflections("tilted", AdjectiveForm.Base))
+    End Sub
+
+    <TestMethod()>
+    Public Sub TestThreeSyllableHandling()
+        Assert.AreEqual("important|more important|most important", inflector.GetAdjectiveInflections("important", AdjectiveForm.Base))
+        Assert.AreEqual("expensive|more expensive|most expensive", inflector.GetAdjectiveInflections("expensive", AdjectiveForm.Base))
+    End Sub
+
+    <TestMethod()>
+    Public Sub TestAFewIrregulars()
+        Assert.AreEqual("little|less|least", inflector.GetAdjectiveInflections("little", AdjectiveForm.Base))
+        Assert.AreEqual("much|more|most", inflector.GetAdjectiveInflections("much", AdjectiveForm.Base))
+        Assert.AreEqual("far|farther|farthest", inflector.GetAdjectiveInflections("far", AdjectiveForm.Base))
+    End Sub
 End Class
