@@ -134,10 +134,11 @@ Public Class TopLevelTest
 
     <TestMethod()>
     Public Sub TestTwoSyllableExceptions()
-        ' TODO quiet, narrow, clever need a fix
+        ' TODO two syllable quiet, narrow, clever need a fix
         'Assert.AreEqual("quiet|quieter|quietest", inflector.GetAdjectiveInflections("quiet", AdjectiveForm.Base))
         'Assert.AreEqual("narrow|narrower|narrowest", inflector.GetAdjectiveInflections("narrow", AdjectiveForm.Base))
         'Assert.AreEqual("clever|cleverer|cleverest", inflector.GetAdjectiveInflections("clever", AdjectiveForm.Base))
+        'Assert.AreEqual("handsome|handsomer|handsomest", inflector.GetAdjectiveInflections("handsome", AdjectiveForm.Base))
     End Sub
 
     <TestMethod()>
@@ -163,18 +164,16 @@ Public Class TopLevelTest
         Assert.AreEqual("high|higher|highest", inflector.GetAdjectiveInflections("high", AdjectiveForm.Base))
         Assert.AreEqual("gentle|gentler|gentlest", inflector.GetAdjectiveInflections("gentle", AdjectiveForm.Base))
 
-        ' TODO willingly fails.
-        'Assert.AreEqual("willingly|more willingly|most willingly", inflector.GetAdjectiveInflections("willingly", AdjectiveForm.Base))
+        ' TODO these are the failures
+        ' bald, bent, blunt, calm, clear, daft, damp, dear, fair, fast, female, fertile, fragile, futile, gaunt, gold, goodlooking, 
+        ' hard, hostile, hurt, lost, live, male, main, near, nearby, north, numb, past, pert, plump, scant, sharp, sheer, soft,
+        ' sterile, strict, swift, taut, top, vast, warm, wholesale, worthwhile, 
+    End Sub
 
-        ' TODO handsome fails.
-        'Assert.AreEqual("handsome|handsomer|handsomest", inflector.GetAdjectiveInflections("handsome", AdjectiveForm.Base)) 
-
-        ' TODO ambulatory fails.
-        'Assert.AreEqual("ambulatory|ambulatorier|ambulatoriest", inflector.GetAdjectiveInflections("ambulatory", AdjectiveForm.Base))
-
-        ' failures
-        ' bald, binary, blunt, broad, calm, clear, complimentary, compulsory, contemporary, contradictory
-        ' contrary, cowardly, customary, daft, damp, dear, discriminatory, disorderly, elderly
+    <TestMethod()>
+    Public Sub TestThreeSyllableEndingInY()
+        Assert.AreEqual("willingly|more willingly|most willingly", inflector.GetAdjectiveInflections("willingly", AdjectiveForm.Base))
+        Assert.AreEqual("ambulatory|more ambulatory|most ambulatory", inflector.GetAdjectiveInflections("ambulatory", AdjectiveForm.Base))
     End Sub
 
     <TestMethod()>

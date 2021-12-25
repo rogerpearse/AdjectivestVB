@@ -189,13 +189,17 @@ Namespace Adjectivest
                                           ByVal syllableCount As Integer, _
                                           ByVal doesWordEndInEd As Boolean) As InflectionType
 
-            If (syllableCount < 2 _
-                OrElse wordText.EndsWith(ySuffix) _
-                OrElse (syllableCount < 3 _
-                        And wordText.EndsWith(leSuffix))) _
-            AndAlso Not doesWordEndInEd Then
+            If doesWordEndInEd Then Return InflectionType.MoreMost
+
+            If syllableCount < 2 Then Return InflectionType.ErEst
+
+            If syllableCount < 3 And wordText.EndsWith(ySuffix) Then Return InflectionType.ErEst
+
+            If (syllableCount < 3 And wordText.EndsWith(leSuffix)) Then
                 Return InflectionType.ErEst
             End If
+
+            ' Otherwise
             Return InflectionType.MoreMost
 
         End Function

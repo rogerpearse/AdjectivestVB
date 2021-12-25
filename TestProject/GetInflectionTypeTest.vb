@@ -37,7 +37,8 @@ Public Class GetInflectionType
 
     <TestMethod()>
     Public Sub TestMore()
-        Assert.AreEqual(InflectionType.MoreMost, inflector.GetInflectionType("elated", 3, True))
+        'Assert.AreEqual(InflectionType.MoreMost, inflector.GetInflectionType("elated", 3, True))
+        Assert.AreEqual(InflectionType.MoreMost, inflector.GetInflectionType("cowardly", 3, False))
     End Sub
 
 End Class
