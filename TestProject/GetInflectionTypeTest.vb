@@ -37,8 +37,18 @@ Public Class GetInflectionType
 
     <TestMethod()>
     Public Sub TestMore()
-        'Assert.AreEqual(InflectionType.MoreMost, inflector.GetInflectionType("elated", 3, True))
+        Assert.AreEqual(InflectionType.MoreMost, inflector.GetInflectionType("elated", 3, True))
         Assert.AreEqual(InflectionType.MoreMost, inflector.GetInflectionType("cowardly", 3, False))
+    End Sub
+
+    <TestMethod()>
+    Public Sub TestBald()
+        Assert.AreEqual(InflectionType.ErEst, inflector.GetInflectionType("bald", 1, False))
+    End Sub
+
+    <TestMethod()>
+    Public Sub TestClear()
+        Assert.AreEqual(InflectionType.ErEst, inflector.GetInflectionType("clear", 1, False))
     End Sub
 
 End Class

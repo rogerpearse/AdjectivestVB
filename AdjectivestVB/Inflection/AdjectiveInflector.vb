@@ -361,10 +361,22 @@ Namespace Adjectivest
                             endsInNonDigraphicDualConsonant = True
                         End If
 
+                        ' TODO this hard-coded list of endings can't be right.
                         If lastConsonant.DoubleOnShortVowel _
                             And Not (TypeOf lastPhoneme Is ConsonantPhoneme And lastConsonant.Formation = ConsonantFormation.Digraph) _
                             AndAlso endsInNonDigraphicDualConsonant = False _
+                            And finalValue.ToLower.EndsWith("ct") = False _
+                            And finalValue.ToLower.EndsWith("ft") = False _
+                            And finalValue.ToLower.EndsWith("ld") = False _
+                            And finalValue.ToLower.EndsWith("lm") = False _
+                            And finalValue.ToLower.EndsWith("mb") = False _
+                            And finalValue.ToLower.EndsWith("mp") = False _
                             And finalValue.ToLower.EndsWith("nd") = False _
+                            And finalValue.ToLower.EndsWith("nt") = False _
+                            And finalValue.ToLower.EndsWith("rd") = False _
+                            And finalValue.ToLower.EndsWith("rm") = False _
+                            And finalValue.ToLower.EndsWith("rp") = False _
+                            And finalValue.ToLower.EndsWith("st") = False _
                             And finalValue.ToLower.EndsWith("rt") = False Then '-- Bodging nd and rt - almost certainly wrong way to do this
                             ' Double last consonant, but not if already doubled, or a digraph
                             finalValue += lastChar

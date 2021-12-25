@@ -163,11 +163,58 @@ Public Class TopLevelTest
         Assert.AreEqual("soon|sooner|soonest", inflector.GetAdjectiveInflections("soon", AdjectiveForm.Base))
         Assert.AreEqual("high|higher|highest", inflector.GetAdjectiveInflections("high", AdjectiveForm.Base))
         Assert.AreEqual("gentle|gentler|gentlest", inflector.GetAdjectiveInflections("gentle", AdjectiveForm.Base))
+    End Sub
+
+    <TestMethod()>
+    Public Sub TestOneSyllableWords()
+        Assert.AreEqual("bald|balder|baldest", inflector.GetAdjectiveInflections("bald", AdjectiveForm.Base))
+        Assert.AreEqual("bent|benter|bentest", inflector.GetAdjectiveInflections("bent", AdjectiveForm.Base))
+        Assert.AreEqual("blunt|blunter|bluntest", inflector.GetAdjectiveInflections("blunt", AdjectiveForm.Base))
+        Assert.AreEqual("calm|calmer|calmest", inflector.GetAdjectiveInflections("calm", AdjectiveForm.Base))
+        Assert.AreEqual("daft|dafter|daftest", inflector.GetAdjectiveInflections("daft", AdjectiveForm.Base))
+        Assert.AreEqual("damp|damper|dampest", inflector.GetAdjectiveInflections("damp", AdjectiveForm.Base))
+        Assert.AreEqual("fast|faster|fastest", inflector.GetAdjectiveInflections("fast", AdjectiveForm.Base))
+        Assert.AreEqual("fast|faster|fastest", inflector.GetAdjectiveInflections("fast", AdjectiveForm.Base))
+        Assert.AreEqual("gaunt|gaunter|gauntest", inflector.GetAdjectiveInflections("gaunt", AdjectiveForm.Base))
+        Assert.AreEqual("gold|golder|goldest", inflector.GetAdjectiveInflections("gold", AdjectiveForm.Base))
+        Assert.AreEqual("hard|harder|hardest", inflector.GetAdjectiveInflections("hard", AdjectiveForm.Base))
+        Assert.AreEqual("numb|number|numbest", inflector.GetAdjectiveInflections("numb", AdjectiveForm.Base))
+        Assert.AreEqual("pert|perter|pertest", inflector.GetAdjectiveInflections("pert", AdjectiveForm.Base))
+        Assert.AreEqual("plump|plumper|plumpest", inflector.GetAdjectiveInflections("plump", AdjectiveForm.Base))
+        Assert.AreEqual("scant|scanter|scantest", inflector.GetAdjectiveInflections("scant", AdjectiveForm.Base))
+        Assert.AreEqual("sharp|sharper|sharpest", inflector.GetAdjectiveInflections("sharp", AdjectiveForm.Base))
+        Assert.AreEqual("soft|softer|softest", inflector.GetAdjectiveInflections("soft", AdjectiveForm.Base))
+        Assert.AreEqual("strict|stricter|strictest", inflector.GetAdjectiveInflections("strict", AdjectiveForm.Base))
+        Assert.AreEqual("swift|swifter|swiftest", inflector.GetAdjectiveInflections("swift", AdjectiveForm.Base))
+        Assert.AreEqual("warm|warmer|warmest", inflector.GetAdjectiveInflections("warm", AdjectiveForm.Base))
+        Assert.AreEqual("vast|vaster|vastest", inflector.GetAdjectiveInflections("vast", AdjectiveForm.Base))
+    End Sub
+
+    <TestMethod()>
+    Public Sub TestTwoSyllableEndingInIle()
+        Assert.AreEqual("fertile|fertiler|fertilest", inflector.GetAdjectiveInflections("fertile", AdjectiveForm.Base))
+        Assert.AreEqual("fragile|fragiler|fragilest", inflector.GetAdjectiveInflections("fragile", AdjectiveForm.Base))
+        Assert.AreEqual("futile|futiler|futilest", inflector.GetAdjectiveInflections("futile", AdjectiveForm.Base))
+        Assert.AreEqual("hostile|more hostile|most hostile", inflector.GetAdjectiveInflections("hostile", AdjectiveForm.Base)) '-- irregular
+        Assert.AreEqual("sterile|more sterile|most sterile", inflector.GetAdjectiveInflections("sterile", AdjectiveForm.Base)) '-- irregular
+        Assert.AreEqual("worthwhile|more worthwhile|most worthwhile", inflector.GetAdjectiveInflections("worthwhile", AdjectiveForm.Base)) '-- irregular
+    End Sub
+
+    <TestMethod()>
+    Public Sub TestTwoSyllableEndingInAle()
+        Assert.AreEqual("female|femaler|femalest", inflector.GetAdjectiveInflections("female", AdjectiveForm.Base))
+        Assert.AreEqual("male|maler|malest", inflector.GetAdjectiveInflections("male", AdjectiveForm.Base))
+
+    End Sub
+
+    <TestMethod()>
+    Public Sub TestFail()
+        'Assert.AreEqual("clear|clearer|clearest", inflector.GetAdjectiveInflections("clear", AdjectiveForm.Base))
 
         ' TODO these are the failures
-        ' bald, bent, blunt, calm, clear, daft, damp, dear, fair, fast, female, fertile, fragile, futile, gaunt, gold, goodlooking, 
-        ' hard, hostile, hurt, lost, live, male, main, near, nearby, north, numb, past, pert, plump, scant, sharp, sheer, soft,
-        ' sterile, strict, swift, taut, top, vast, warm, wholesale, worthwhile, 
+        ' clear, dear, fair, , , , , , , goodlooking, 
+        ' , , hurt, lost, live, , main, near, nearby, north, , past, , , , sheer, ,
+        ' , , , taut, top, , , wholesale, , 
     End Sub
 
     <TestMethod()>
