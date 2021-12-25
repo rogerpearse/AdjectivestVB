@@ -95,7 +95,12 @@ Public Class TopLevelTest
     Public Sub TestOneSyllableHandling()
         Assert.AreEqual("fat|fatter|fattest", inflector.GetAdjectiveInflections("fat", AdjectiveForm.Base))
         Assert.AreEqual("slim|slimmer|slimmest", inflector.GetAdjectiveInflections("slim", AdjectiveForm.Base))
+    End Sub
+
+    <TestMethod()>
+    Public Sub TestOneSyllableEndingInE()
         Assert.AreEqual("wide|wider|widest", inflector.GetAdjectiveInflections("wide", AdjectiveForm.Base))
+        Assert.AreEqual("rare|rarer|rarest", inflector.GetAdjectiveInflections("rare", AdjectiveForm.Base))
     End Sub
 
     <TestMethod()>
@@ -103,6 +108,14 @@ Public Class TopLevelTest
         Assert.AreEqual("rich|richer|richest", inflector.GetAdjectiveInflections("rich", AdjectiveForm.Base))
         Assert.AreEqual("lush|lusher|lushest", inflector.GetAdjectiveInflections("lush", AdjectiveForm.Base))
         Assert.AreEqual("sick|sicker|sickest", inflector.GetAdjectiveInflections("sick", AdjectiveForm.Base))
+        Assert.AreEqual("round|rounder|roundest", inflector.GetAdjectiveInflections("round", AdjectiveForm.Base))
+    End Sub
+
+    <TestMethod()>
+    Public Sub TestGrand()
+        ' Bodged this
+        Assert.AreEqual("grand|grander|grandest", inflector.GetAdjectiveInflections("grand", AdjectiveForm.Base))
+        Assert.AreEqual("short|shorter|shortest", inflector.GetAdjectiveInflections("short", AdjectiveForm.Base))
     End Sub
 
     <TestMethod()>
@@ -116,19 +129,22 @@ Public Class TopLevelTest
         Assert.AreEqual("simple|simpler|simplest", inflector.GetAdjectiveInflections("simple", AdjectiveForm.Base))
         Assert.AreEqual("busy|busier|busiest", inflector.GetAdjectiveInflections("busy", AdjectiveForm.Base))
         Assert.AreEqual("tilted|more tilted|most tilted", inflector.GetAdjectiveInflections("tilted", AdjectiveForm.Base))
+        Assert.AreEqual("useful|more useful|most useful", inflector.GetAdjectiveInflections("useful", AdjectiveForm.Base))
     End Sub
 
     <TestMethod()>
     Public Sub TestTwoSyllableExceptions()
-        ' TODO quiet and narrow do not work.
+        ' TODO quiet, narrow, clever need a fix
         'Assert.AreEqual("quiet|quieter|quietest", inflector.GetAdjectiveInflections("quiet", AdjectiveForm.Base))
         'Assert.AreEqual("narrow|narrower|narrowest", inflector.GetAdjectiveInflections("narrow", AdjectiveForm.Base))
+        'Assert.AreEqual("clever|cleverer|cleverest", inflector.GetAdjectiveInflections("clever", AdjectiveForm.Base))
     End Sub
 
     <TestMethod()>
     Public Sub TestThreeSyllableHandling()
         Assert.AreEqual("important|more important|most important", inflector.GetAdjectiveInflections("important", AdjectiveForm.Base))
         Assert.AreEqual("expensive|more expensive|most expensive", inflector.GetAdjectiveInflections("expensive", AdjectiveForm.Base))
+        Assert.AreEqual("popular|more popular|most popular", inflector.GetAdjectiveInflections("popular", AdjectiveForm.Base))
     End Sub
 
     <TestMethod()>
@@ -136,5 +152,30 @@ Public Class TopLevelTest
         Assert.AreEqual("little|less|least", inflector.GetAdjectiveInflections("little", AdjectiveForm.Base))
         Assert.AreEqual("much|more|most", inflector.GetAdjectiveInflections("much", AdjectiveForm.Base))
         Assert.AreEqual("far|farther|farthest", inflector.GetAdjectiveInflections("far", AdjectiveForm.Base))
+    End Sub
+
+    <TestMethod()>
+    Public Sub TestOthers()
+        Assert.AreEqual("orange|more orange|most orange", inflector.GetAdjectiveInflections("orange", AdjectiveForm.Base))  ' colour
+        Assert.AreEqual("pious|more pious|most pious", inflector.GetAdjectiveInflections("pious", AdjectiveForm.Base))
+        Assert.AreEqual("soon|sooner|soonest", inflector.GetAdjectiveInflections("soon", AdjectiveForm.Base))
+        Assert.AreEqual("high|higher|highest", inflector.GetAdjectiveInflections("high", AdjectiveForm.Base))
+        Assert.AreEqual("gentle|gentler|gentlest", inflector.GetAdjectiveInflections("gentle", AdjectiveForm.Base))
+
+        ' TODO willingly fails
+        'Assert.AreEqual("willingly|more willingly|most willingly", inflector.GetAdjectiveInflections("willingly", AdjectiveForm.Base))
+
+        ' TODO handsome fails
+        'Assert.AreEqual("handsome|handsomer|handsomest", inflector.GetAdjectiveInflections("handsome", AdjectiveForm.Base)) 
+    End Sub
+
+    <TestMethod()>
+    Public Sub TestManyAndMuch()
+        Assert.AreEqual("many|more|most", inflector.GetAdjectiveInflections("many", AdjectiveForm.Base))
+        Assert.AreEqual("much|more|most", inflector.GetAdjectiveInflections("much", AdjectiveForm.Base))
+
+        ' TODO Much and Many both have comparative of more.  These fail badly and return "fun|more fun|most fun"!
+        'Assert.AreEqual("many|more|most", inflector.GetAdjectiveInflections("more", AdjectiveForm.Comparative))
+        'Assert.AreEqual("many|more|most", inflector.GetAdjectiveInflections("more"))
     End Sub
 End Class

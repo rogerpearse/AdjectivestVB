@@ -6,6 +6,7 @@ hind,hinder,hindmost
 ill,worse,worst
 less,lesser,least
 little,less,least
+many,more,most
 much,more,most
 stupid,stupider,stupidest
 well,better,best

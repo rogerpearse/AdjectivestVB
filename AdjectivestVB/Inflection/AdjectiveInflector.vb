@@ -349,7 +349,9 @@ Namespace Adjectivest
 
                         If lastConsonant.DoubleOnShortVowel _
                             And Not (TypeOf lastPhoneme Is ConsonantPhoneme And lastConsonant.Formation = ConsonantFormation.Digraph) _
-                            AndAlso endsInNonDigraphicDualConsonant = False Then
+                            AndAlso endsInNonDigraphicDualConsonant = False _
+                            And finalValue.ToLower.EndsWith("nd") = False _
+                            And finalValue.ToLower.EndsWith("rt") = False Then '-- Bodging nd and rt - almost certainly wrong way to do this
                             ' Double last consonant, but not if already doubled, or a digraph
                             finalValue += lastChar
                             finalValue += suffix

@@ -50,7 +50,7 @@ Namespace Adjectivest.Core.AdjectiveDictionary
                 Next
             End Using
 
-            Return Nothing  '-- TODO antipattern
+            Return Nothing  ' TODO returning nothing as a normal outcome and testing for it is an antipattern
         End Function
 
         Protected Overrides Function GetAdjectivesListLetterIndices() As Dictionary(Of Char, Integer)

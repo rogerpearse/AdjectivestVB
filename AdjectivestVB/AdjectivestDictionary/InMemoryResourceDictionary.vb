@@ -52,7 +52,7 @@ Namespace Adjectivest
                 End If
             Next
 
-            Return Nothing '-- TODO anti-pattern
+            Return Nothing ' TODO returning nothing as a normal outcome and testing for it is an antipattern
         End Function
 
         Protected Overrides Function GetAdjectivesListLetterIndices() As Dictionary(Of Char, Integer)
