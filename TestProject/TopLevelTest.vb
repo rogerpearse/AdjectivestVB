@@ -145,6 +145,7 @@ Public Class TopLevelTest
         Assert.AreEqual("important|more important|most important", inflector.GetAdjectiveInflections("important", AdjectiveForm.Base))
         Assert.AreEqual("expensive|more expensive|most expensive", inflector.GetAdjectiveInflections("expensive", AdjectiveForm.Base))
         Assert.AreEqual("popular|more popular|most popular", inflector.GetAdjectiveInflections("popular", AdjectiveForm.Base))
+        Assert.AreEqual("valiant|more valiant|most valiant", inflector.GetAdjectiveInflections("valiant", AdjectiveForm.Base))
     End Sub
 
     <TestMethod()>
@@ -162,11 +163,18 @@ Public Class TopLevelTest
         Assert.AreEqual("high|higher|highest", inflector.GetAdjectiveInflections("high", AdjectiveForm.Base))
         Assert.AreEqual("gentle|gentler|gentlest", inflector.GetAdjectiveInflections("gentle", AdjectiveForm.Base))
 
-        ' TODO willingly fails
+        ' TODO willingly fails.
         'Assert.AreEqual("willingly|more willingly|most willingly", inflector.GetAdjectiveInflections("willingly", AdjectiveForm.Base))
 
-        ' TODO handsome fails
+        ' TODO handsome fails.
         'Assert.AreEqual("handsome|handsomer|handsomest", inflector.GetAdjectiveInflections("handsome", AdjectiveForm.Base)) 
+
+        ' TODO ambulatory fails.
+        'Assert.AreEqual("ambulatory|ambulatorier|ambulatoriest", inflector.GetAdjectiveInflections("ambulatory", AdjectiveForm.Base))
+
+        ' failures
+        ' bald, binary, blunt, broad, calm, clear, complimentary, compulsory, contemporary, contradictory
+        ' contrary, cowardly, customary, daft, damp, dear, discriminatory, disorderly, elderly
     End Sub
 
     <TestMethod()>
@@ -177,5 +185,18 @@ Public Class TopLevelTest
         ' TODO Much and Many both have comparative of more.  These fail badly and return "fun|more fun|most fun"!
         'Assert.AreEqual("many|more|most", inflector.GetAdjectiveInflections("more", AdjectiveForm.Comparative))
         'Assert.AreEqual("many|more|most", inflector.GetAdjectiveInflections("more"))
+    End Sub
+
+    ' Run against the whole list of adjectives.  Then paste the output into MS Word and let spell-checker look for funnies.
+    '<TestMethod()>
+    Public Sub TestAll()
+
+        Dim Adjectives As String() = CType(inflector.ResourceDictionary, InMemoryResourceDictionary).getAdjectivesLines()
+
+        For i = 32 To Adjectives.Count - 1
+            Dim s As String = Adjectives(i).Trim & " => " & inflector.GetAdjectiveInflections(Adjectives(i).Trim)
+            Debug.Print(s.Replace("|", ", "))
+        Next
+
     End Sub
 End Class

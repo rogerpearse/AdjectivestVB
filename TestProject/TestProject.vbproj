@@ -75,6 +75,8 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GetInflectionTypeTest.vb" />
+    <Compile Include="DoesWordEndInEdTest.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="TopLevelTest.vb" />
   </ItemGroup>

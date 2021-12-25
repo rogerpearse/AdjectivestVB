@@ -83,7 +83,11 @@ Namespace Adjectivest
                 Return word
             End If
 
-            Dim inflectionType = GetInflectionType(inflectionBase)
+            ' Do we use more/most or -er/est?
+            Dim endsInEd As Boolean = DoesWordEndInEd(inflectionBase.Word)
+            Dim inflectionType As InflectionType = GetInflectionType(inflectionBase.Word, _
+                                                                     inflectionBase.SyllableCount, _
+                                                                     endsInEd)
 
             Select Case adjectiveForm
                 Case adjectiveForm.Base
@@ -178,12 +182,18 @@ Namespace Adjectivest
             Return IsKnownIrregular(word, comparative, superlative)
         End Function
 
-        Public Function GetInflectionType(ByVal word As WordObj) As InflectionType
-            Dim wordText = word.Word
-            Dim syllableCount = word.SyllableCount
+        ''' <summary>
+        ''' Do we use more/most or -er/-est?
+        ''' </summary>
+        Public Function GetInflectionType(ByVal wordText As String, _
+                                          ByVal syllableCount As Integer, _
+                                          ByVal doesWordEndInEd As Boolean) As InflectionType
 
-            If (syllableCount < 2 OrElse wordText.EndsWith(ySuffix) OrElse (syllableCount < 3 And wordText.EndsWith(leSuffix))) _
-            AndAlso Not IsPastParticiple(word) Then
+            If (syllableCount < 2 _
+                OrElse wordText.EndsWith(ySuffix) _
+                OrElse (syllableCount < 3 _
+                        And wordText.EndsWith(leSuffix))) _
+            AndAlso Not doesWordEndInEd Then
                 Return InflectionType.ErEst
             End If
             Return InflectionType.MoreMost
@@ -411,8 +421,11 @@ Namespace Adjectivest
             Return New WordObj(word, phonemes)
         End Function
 
-        Private Function IsPastParticiple(ByVal wordObj As WordObj) As Boolean
-            Return wordObj.Word.EndsWith(pastParticipleEnding) AndAlso wordObj.Word.Length > 3
+        ''' <summary>
+        ''' Does word end in "ed"?   Renamed from IsPastParticiple, which it is not.
+        ''' </summary>
+        Public Function DoesWordEndInEd(ByVal word As String) As Boolean
+            Return word.Length > 3 AndAlso word.EndsWith(pastParticipleEnding)
         End Function
 
         Protected Overridable Sub Dispose(ByVal disposing As Boolean)

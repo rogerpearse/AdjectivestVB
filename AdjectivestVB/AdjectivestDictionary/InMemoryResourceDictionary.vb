@@ -18,19 +18,33 @@ Namespace Adjectivest
             PhonemeCollection = New PhonemeCollection()
         End Sub
 
+        ''' <summary>
+        ''' Used only for test
+        ''' </summary>
+        Public Function getAdjectivesLines() As String()
+            Return adjectivesLines
+        End Function
+
         Public Overrides Function AdjectivesListContainsWord(ByVal word As String) As Boolean
             Dim first As Char = word(0)
             Dim startIndex As Integer = adjectivesListLetterIndices(first)
-            Dim maxIndex As Integer = adjectivesListLetterIndices(Microsoft.VisualBasic.ChrW(AscW(first) + 1))
+            Try
 
-            For i = startIndex To maxIndex - 1
+                Dim maxIndex As Integer = adjectivesListLetterIndices(Microsoft.VisualBasic.ChrW(AscW(first) + 1))
 
-                If adjectivesLines(i).Equals(word) Then
-                    Return True
-                End If
-            Next
+                For i = startIndex To maxIndex - 1
 
-            Return False
+                    If adjectivesLines(i).Equals(word) Then
+                        Return True
+                    End If
+                Next
+
+                Return False
+            Catch ex As Exception
+                ' TODO ought to have better
+                Return False
+            End Try
+
         End Function
 
         Public Overrides Function DictContainsWord(ByVal word As String) As Boolean
