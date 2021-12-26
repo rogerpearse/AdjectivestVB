@@ -361,23 +361,12 @@ Namespace Adjectivest
                             endsInNonDigraphicDualConsonant = True
                         End If
 
-                        ' TODO this hard-coded list of endings can't be right.
-                        If lastConsonant.DoubleOnShortVowel _
-                            And Not (TypeOf lastPhoneme Is ConsonantPhoneme And lastConsonant.Formation = ConsonantFormation.Digraph) _
-                            AndAlso endsInNonDigraphicDualConsonant = False _
-                            And finalValue.ToLower.EndsWith("ct") = False _
-                            And finalValue.ToLower.EndsWith("ft") = False _
-                            And finalValue.ToLower.EndsWith("ld") = False _
-                            And finalValue.ToLower.EndsWith("lm") = False _
-                            And finalValue.ToLower.EndsWith("mb") = False _
-                            And finalValue.ToLower.EndsWith("mp") = False _
-                            And finalValue.ToLower.EndsWith("nd") = False _
-                            And finalValue.ToLower.EndsWith("nt") = False _
-                            And finalValue.ToLower.EndsWith("rd") = False _
-                            And finalValue.ToLower.EndsWith("rm") = False _
-                            And finalValue.ToLower.EndsWith("rp") = False _
-                            And finalValue.ToLower.EndsWith("st") = False _
-                            And finalValue.ToLower.EndsWith("rt") = False Then '-- Bodging nd and rt - almost certainly wrong way to do this
+                        '-- Test moved to function, and bodged
+                        If doWeDoubleLastConsonant(lastConsonant.DoubleOnShortVowel, _
+                                                   lastConsonant.Formation, _
+                                                   TypeOf lastPhoneme Is ConsonantPhoneme, _
+                                                   finalValue.ToLower, _
+                                                   endsInNonDigraphicDualConsonant) Then
                             ' Double last consonant, but not if already doubled, or a digraph
                             finalValue += lastChar
                             finalValue += suffix
@@ -397,6 +386,47 @@ Namespace Adjectivest
             End If
 
             Return finalValue
+        End Function
+
+        ''' <summary>
+        ''' Double last consonant, but not if already doubled, or a digraph
+        ''' </summary>        
+        Public Function doWeDoubleLastConsonant(lastConsonantDoubleOnShortVowel As Boolean, _
+                                                lastConsonantFormation As ConsonantFormation, _
+                                                isLastConsonantPhoneme As Boolean, _
+                                                finalValue As String, _
+                                                endsInNonDigraphicDualConsonant As Boolean) As Boolean
+
+            ' TODO the logic is backwards - we are always doubling unless we have a reason not to.  This is wrong.  Never double unless we must
+
+            If lastConsonantDoubleOnShortVowel = False Then Return False
+
+            If isLastConsonantPhoneme AndAlso lastConsonantFormation = ConsonantFormation.Digraph Then Return False
+
+            ' This has been frigged for tall
+            If endsInNonDigraphicDualConsonant Then Return False
+
+            
+            ' TODO this hard-coded list of endings can't be right.
+            ' Bodging nd and rt - almost certainly wrong way to do this
+            If finalValue.ToLower.EndsWith("ct") = False _
+                And finalValue.ToLower.EndsWith("ft") = False _
+                And finalValue.ToLower.EndsWith("ld") = False _
+                And finalValue.ToLower.EndsWith("lm") = False _
+                And finalValue.ToLower.EndsWith("mb") = False _
+                And finalValue.ToLower.EndsWith("mp") = False _
+                And finalValue.ToLower.EndsWith("nd") = False _
+                And finalValue.ToLower.EndsWith("nt") = False _
+                And finalValue.ToLower.EndsWith("rd") = False _
+                And finalValue.ToLower.EndsWith("rm") = False _
+                And finalValue.ToLower.EndsWith("rp") = False _
+                And finalValue.ToLower.EndsWith("st") = False _
+                And finalValue.ToLower.EndsWith("rt") = False Then
+
+                Return True
+            End If
+            Return False
+
         End Function
 
         Private Function GetMultiSyllabicComparative(ByVal wordObj As WordObj, ByVal comparisonType As AdjectiveForm) As String
