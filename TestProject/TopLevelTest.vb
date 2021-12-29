@@ -208,6 +208,32 @@ Public Class TopLevelTest
     End Sub
 
     <TestMethod()>
+    Public Sub TestConsonantVowelConsonantDoesNotDouble()
+        ' https://speakspeak.com/resources/english-grammar-rules/english-spelling-rules/double-consonant-adjective-before-er-est
+        Assert.AreEqual("thin|thinner|thinnest", inflector.GetAdjectiveInflections("thin", AdjectiveForm.Base))
+    End Sub
+
+    <TestMethod()>
+    Public Sub TestEndsInYorWDoesNotDouble()
+        ' https://speakspeak.com/resources/english-grammar-rules/english-spelling-rules/double-consonant-adjective-before-er-est
+        Assert.AreEqual("grey|greyer|greyest", inflector.GetAdjectiveInflections("grey", AdjectiveForm.Base))
+        Assert.AreEqual("slow|slower|slowest", inflector.GetAdjectiveInflections("slow", AdjectiveForm.Base))
+    End Sub
+
+    <TestMethod()>
+    Public Sub TestVowelVowelConsonantDoesNotDouble()
+        ' https://speakspeak.com/resources/english-grammar-rules/english-spelling-rules/double-consonant-adjective-before-er-est
+        Assert.AreEqual("cheap|cheaper|cheapest", inflector.GetAdjectiveInflections("cheap", AdjectiveForm.Base))
+        Assert.AreEqual("clear|clearer|clearest", inflector.GetAdjectiveInflections("clear", AdjectiveForm.Base))
+    End Sub
+
+    <TestMethod()>
+    Public Sub TestVowelConsonantConsonantDoesNotDouble()
+        ' https://speakspeak.com/resources/english-grammar-rules/english-spelling-rules/double-consonant-adjective-before-er-est
+        Assert.AreEqual("old|older|oldest", inflector.GetAdjectiveInflections("old", AdjectiveForm.Base))
+    End Sub
+
+    <TestMethod()>
     Public Sub TestFail()
         'Assert.AreEqual("clear|clearer|clearest", inflector.GetAdjectiveInflections("clear", AdjectiveForm.Base))
 

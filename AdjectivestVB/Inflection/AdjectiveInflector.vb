@@ -343,30 +343,14 @@ Namespace Adjectivest
                 Select Case firstVowel.Length
                     Case VowelLength.Short
 
-                        ' This is the original code, which should return true for "tall" but in fact returns false.
-                        ' It also fails for rich and other digraphs
-                        'Dim endsInNonDigraphicDualConsonant As Boolean = TypeOf wordObj.GetPenultimatePhoneme() Is ConsonantPhoneme
-
-                        ' A digraph is two letters that combine together to correspond to one sound (phoneme). 
-                        ' Examples of consonant digraphs are ‘ch, sh, th, ng’.
-
                         Dim lastPhoneme As Phoneme = wordObj.GetLastPhoneme()
-                        Dim penultimateConsonant As Phoneme = wordObj.GetPenultimatePhoneme()
-
-                        ' Rough and ready fix for "tall"
-                        Dim endsInNonDigraphicDualConsonant As Boolean = False
                         Dim lastChar As Char = word(word.Length - 1)
-                        Dim penultimateChar As Char = word(word.Length - 2)
-                        If lastChar = penultimateChar Then
-                            endsInNonDigraphicDualConsonant = True
-                        End If
 
                         '-- Test moved to function, and bodged
-                        If doWeDoubleLastConsonant(lastConsonant.DoubleOnShortVowel, _
+                        If doWeDoubleLastConsonant(finalValue.ToLower, _
+                                                   lastConsonant.DoubleOnShortVowel, _
                                                    lastConsonant.Formation, _
-                                                   TypeOf lastPhoneme Is ConsonantPhoneme, _
-                                                   finalValue.ToLower, _
-                                                   endsInNonDigraphicDualConsonant) Then
+                                                   TypeOf lastPhoneme Is ConsonantPhoneme) Then
                             ' Double last consonant, but not if already doubled, or a digraph
                             finalValue += lastChar
                             finalValue += suffix
@@ -389,44 +373,49 @@ Namespace Adjectivest
         End Function
 
         ''' <summary>
-        ''' Double last consonant, but not if already doubled, or a digraph
+        ''' Double last consonant, but not if already doubled, or a digraph, or other rules
         ''' </summary>        
-        Public Function doWeDoubleLastConsonant(lastConsonantDoubleOnShortVowel As Boolean, _
+        Public Function doWeDoubleLastConsonant(finalValue As String, _
+                                                lastConsonantDoubleOnShortVowel As Boolean, _
                                                 lastConsonantFormation As ConsonantFormation, _
-                                                isLastConsonantPhoneme As Boolean, _
-                                                finalValue As String, _
-                                                endsInNonDigraphicDualConsonant As Boolean) As Boolean
+                                                isLastConsonantPhoneme As Boolean) As Boolean
 
-            ' TODO the logic is backwards - we are always doubling unless we have a reason not to.  This is wrong.  Never double unless we must
+            'If lastConsonantDoubleOnShortVowel = False Then Return False
 
-            If lastConsonantDoubleOnShortVowel = False Then Return False
-
-            If isLastConsonantPhoneme AndAlso lastConsonantFormation = ConsonantFormation.Digraph Then Return False
+            'If isLastConsonantPhoneme AndAlso lastConsonantFormation = ConsonantFormation.Digraph Then Return False
 
             ' This has been frigged for tall
-            If endsInNonDigraphicDualConsonant Then Return False
+            'If endsInNonDigraphicDualConsonant Then Return False
 
-            
-            ' TODO this hard-coded list of endings can't be right.
-            ' Bodging nd and rt - almost certainly wrong way to do this
-            If finalValue.ToLower.EndsWith("ct") = False _
-                And finalValue.ToLower.EndsWith("ft") = False _
-                And finalValue.ToLower.EndsWith("ld") = False _
-                And finalValue.ToLower.EndsWith("lm") = False _
-                And finalValue.ToLower.EndsWith("mb") = False _
-                And finalValue.ToLower.EndsWith("mp") = False _
-                And finalValue.ToLower.EndsWith("nd") = False _
-                And finalValue.ToLower.EndsWith("nt") = False _
-                And finalValue.ToLower.EndsWith("rd") = False _
-                And finalValue.ToLower.EndsWith("rm") = False _
-                And finalValue.ToLower.EndsWith("rp") = False _
-                And finalValue.ToLower.EndsWith("st") = False _
-                And finalValue.ToLower.EndsWith("rt") = False Then
+            '-- Last three chars.  If shorter then we can't do much.  Coded from
+            ' https://speakspeak.com/resources/english-grammar-rules/english-spelling-rules/double-consonant-adjective-before-er-est
+            If finalValue.Length < 3 Then Return True
+            Dim char3 As Char = finalValue(finalValue.Length - 1)
+            Dim char2 As Char = finalValue(finalValue.Length - 2)
+            Dim char1 As Char = finalValue(finalValue.Length - 3)
 
+            '-- We DO double the final letter when the adjective ends in consonant + vowel + consonant
+            If Not isVowel(char1) And isVowel(char2) And Not isVowel(char3) Then
                 Return True
             End If
+
+            '-- We don't double the final letter when the adjective ends in vowel + vowel + consonant
+            If isVowel(char1) And isVowel(char2) And Not isVowel(char3) Then
+                Return False
+            End If
+
+            '-- We don't double the final letter when the adjective ends in vowel + consonant + consonant
+            If isVowel(char1) And Not isVowel(char2) And Not isVowel(char3) Then
+                Return False
+            End If
+
+            '-- Otherwise do not double the consonant
             Return False
 
+        End Function
+
+        Public Function isVowel(c As Char) As Boolean
+            Return "aeiou".Contains(c)
         End Function
 
         Private Function GetMultiSyllabicComparative(ByVal wordObj As WordObj, ByVal comparisonType As AdjectiveForm) As String
