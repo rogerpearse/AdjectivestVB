@@ -1,5 +1,5 @@
 ﻿Imports System.Text
-Imports Adjectivest.Adjectivest
+Imports Adjectivest
 
 <TestClass()>
 <DeploymentItem("AdjectivestResources", "AdjectivestResources")> _

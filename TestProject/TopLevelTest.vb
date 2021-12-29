@@ -1,5 +1,5 @@
 ﻿Imports System.Text
-Imports Adjectivest.Adjectivest
+Imports Adjectivest
 
 ' This is all setup for Visual Studio 2010 Ultimate.
 ' Test setup notes.
@@ -225,6 +225,11 @@ Public Class TopLevelTest
         ' https://speakspeak.com/resources/english-grammar-rules/english-spelling-rules/double-consonant-adjective-before-er-est
         Assert.AreEqual("cheap|cheaper|cheapest", inflector.GetAdjectiveInflections("cheap", AdjectiveForm.Base))
         Assert.AreEqual("clear|clearer|clearest", inflector.GetAdjectiveInflections("clear", AdjectiveForm.Base))
+        Assert.AreEqual("dear|dearer|dearest", inflector.GetAdjectiveInflections("dear", AdjectiveForm.Base))
+        Assert.AreEqual("fair|fairer|fairest", inflector.GetAdjectiveInflections("fair", AdjectiveForm.Base))
+        Assert.AreEqual("near|nearer|nearest", inflector.GetAdjectiveInflections("near", AdjectiveForm.Base))
+        Assert.AreEqual("sheer|sheerer|sheerest", inflector.GetAdjectiveInflections("sheer", AdjectiveForm.Base))
+        Assert.AreEqual("taut|tauter|tautest", inflector.GetAdjectiveInflections("taut", AdjectiveForm.Base))
     End Sub
 
     <TestMethod()>
@@ -234,13 +239,20 @@ Public Class TopLevelTest
     End Sub
 
     <TestMethod()>
-    Public Sub TestFail()
-        'Assert.AreEqual("clear|clearer|clearest", inflector.GetAdjectiveInflections("clear", AdjectiveForm.Base))
+    Public Sub TestNorth()
+        Assert.AreEqual("north|norther|northest", inflector.GetAdjectiveInflections("north", AdjectiveForm.Base))
+        'Assert.AreEqual("wholesale|more wholesale|most wholesale", inflector.GetAdjectiveInflections("wholesale", AdjectiveForm.Base))
+        'Assert.AreEqual("goodlooking|more goodlooking|most goodlooking", inflector.GetAdjectiveInflections("goodlooking", AdjectiveForm.Base))
+    End Sub
+
+    <TestMethod()>
+    Public Sub TestPastParticiplesMoonlightingAsAdjectives()
+        'Assert.AreEqual("hurt|more hurt|most hurt", inflector.GetAdjectiveInflections("hurt", AdjectiveForm.Base))
 
         ' TODO these are the failures
-        ' clear, dear, fair, , , , , , , goodlooking, 
-        ' , , hurt, lost, live, , main, near, nearby, north, , past, , , , sheer, ,
-        ' , , , taut, top, , , wholesale, , 
+        '  , , , , , , goodlooking, 
+        ' , , hurt, lost, live, , nearby, , , past, , , , 
+        ' , , , top, , , , , 
     End Sub
 
     <TestMethod()>

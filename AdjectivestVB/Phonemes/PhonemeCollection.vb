@@ -2,7 +2,7 @@
 Imports System.Collections.Generic
 Imports System.IO
 
-Namespace Adjectivest.Phonemes
+Namespace Phonemes
     Public Class PhonemeCollection
         Implements IDisposable
 

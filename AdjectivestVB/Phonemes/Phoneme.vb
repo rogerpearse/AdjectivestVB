@@ -1,5 +1,5 @@
 ﻿
-Namespace Adjectivest.Phonemes
+Namespace Phonemes
     Public MustInherit Class Phoneme
         Private _Symbol As String, _PronunciationExample As String, _PhonemeType As Adjectivest.Phonemes.PhonemeType
 

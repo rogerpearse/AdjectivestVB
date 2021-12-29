@@ -1,7 +1,7 @@
 ﻿Option Strict On
 Option Explicit On
 
-Imports Adjectivest.Adjectivest
+Imports Adjectivest
 
 Public Class Form1
 

@@ -1,5 +1,5 @@
 ﻿
-Namespace Adjectivest.Phonemes
+Namespace Phonemes
     Public Enum PhonemeType
         Consonant
         Vowel
