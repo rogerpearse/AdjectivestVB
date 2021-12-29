@@ -13,4 +13,5 @@ well,better,best
 hostile,more hostile,most hostile
 sterile,more sterile,most sterile
 worthwhile,more worthwhile,most worthwhile
+wholesale,more wholesale,most wholesale
 

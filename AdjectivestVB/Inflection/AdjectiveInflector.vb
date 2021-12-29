@@ -75,9 +75,9 @@ Public Class AdjectiveInflector
 
         Dim inflectionBase = If(baseWordObj Is Nothing, wordObj, baseWordObj)
 
-        '-- If nothing can be found to work with, just return the word
+        '-- If nothing can be found to work with, just return the word with more/most
         If inflectionBase.Phonemes Is Nothing Then
-            Return word
+            Return Format(word, GetComparative(inflectionBase, Adjectivest.InflectionType.MoreMost), GetSuperlative(inflectionBase, Adjectivest.InflectionType.MoreMost))
         End If
 
         ' Do we use more/most or -er/est?
@@ -406,7 +406,11 @@ Public Class AdjectiveInflector
         Return "aeiou".Contains(c)
     End Function
 
+    ''' <summary>
+    ''' Put "more" or "most" on the front of the word
+    ''' </summary>
     Private Function GetMultiSyllabicComparative(ByVal wordObj As WordObj, ByVal comparisonType As AdjectiveForm) As String
+
         Dim finalValue = wordObj.Word
         Dim prefix As String = ""
 

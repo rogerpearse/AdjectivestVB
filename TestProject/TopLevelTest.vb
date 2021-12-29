@@ -68,11 +68,10 @@ Public Class TopLevelTest
     End Sub
 
     <TestMethod()>
-    Public Sub TestGarbageWordsJustReturnInputString()
-        '-- This is the failure path.  Something that can't be inflected just returns the same string input
-        Assert.AreEqual("zesty", inflector.GetAdjectiveInflections("zesty"))
-        Assert.AreEqual("crungus", inflector.GetAdjectiveInflections("crungus"))
-        Assert.AreEqual("woogle", inflector.GetAdjectiveInflections("woogle"))
+    Public Sub TestGarbageWordsJustReturnMoreMost()
+        Assert.AreEqual("zesty|more zesty|most zesty", inflector.GetAdjectiveInflections("zesty"))
+        Assert.AreEqual("crungus|more crungus|most crungus", inflector.GetAdjectiveInflections("crungus"))
+        Assert.AreEqual("woogle|more woogle|most woogle", inflector.GetAdjectiveInflections("woogle"))
     End Sub
 
     <TestMethod()>
@@ -241,18 +240,15 @@ Public Class TopLevelTest
     <TestMethod()>
     Public Sub TestNorth()
         Assert.AreEqual("north|norther|northest", inflector.GetAdjectiveInflections("north", AdjectiveForm.Base))
-        'Assert.AreEqual("wholesale|more wholesale|most wholesale", inflector.GetAdjectiveInflections("wholesale", AdjectiveForm.Base))
-        'Assert.AreEqual("goodlooking|more goodlooking|most goodlooking", inflector.GetAdjectiveInflections("goodlooking", AdjectiveForm.Base))
+        Assert.AreEqual("goodlooking|more goodlooking|most goodlooking", inflector.GetAdjectiveInflections("goodlooking", AdjectiveForm.Base))
+        Assert.AreEqual("wholesale|more wholesale|most wholesale", inflector.GetAdjectiveInflections("wholesale", AdjectiveForm.Base))
     End Sub
 
     <TestMethod()>
-    Public Sub TestPastParticiplesMoonlightingAsAdjectives()
+    Public Sub TestTheRestArePastParticiplesMoonlightingAsAdjectives()
+        ' TODO not implemented yet
         'Assert.AreEqual("hurt|more hurt|most hurt", inflector.GetAdjectiveInflections("hurt", AdjectiveForm.Base))
-
-        ' TODO these are the failures
-        '  , , , , , , goodlooking, 
-        ' , , hurt, lost, live, , nearby, , , past, , , , 
-        ' , , , top, , , , , 
+        'Assert.AreEqual("lost|more lost|most lost", inflector.GetAdjectiveInflections("lost", AdjectiveForm.Base))
     End Sub
 
     <TestMethod()>
@@ -266,7 +262,7 @@ Public Class TopLevelTest
         Assert.AreEqual("many|more|most", inflector.GetAdjectiveInflections("many", AdjectiveForm.Base))
         Assert.AreEqual("much|more|most", inflector.GetAdjectiveInflections("much", AdjectiveForm.Base))
 
-        ' TODO Much and Many both have comparative of more.  These fail badly and return "fun|more fun|most fun"!
+        ' TODO fix bug. Much and Many both have a comparative of more.  This fails badly and returns "fun|more fun|most fun"!
         'Assert.AreEqual("many|more|most", inflector.GetAdjectiveInflections("more", AdjectiveForm.Comparative))
         'Assert.AreEqual("many|more|most", inflector.GetAdjectiveInflections("more"))
     End Sub
