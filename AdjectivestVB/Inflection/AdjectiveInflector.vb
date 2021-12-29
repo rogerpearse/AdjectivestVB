@@ -55,7 +55,7 @@ Public Class AdjectiveInflector
     ''' Leaving it as AdjectiveForm.None, the program will attempt to infer its form. Output is the same either way
     ''' </summary>
     Public Function GetAdjectiveInflections(ByVal word As String, _
-                                                  Optional ByVal adjectiveForm As AdjectiveForm = AdjectiveForm.None) As String
+                                            Optional ByVal adjectiveForm As AdjectiveForm = AdjectiveForm.None) As String
         Dim baseForm = ""
         Dim comparative = ""
         Dim superlative = ""

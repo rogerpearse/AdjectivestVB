@@ -245,10 +245,16 @@ Public Class TopLevelTest
     End Sub
 
     <TestMethod()>
-    Public Sub TestTheRestArePastParticiplesMoonlightingAsAdjectives()
-        ' TODO not implemented yet
+    Public Sub TestOneSyllablePastParticiplesMoonlightingAsAdjectives()
+        ' TODO we have no code for these, and grown, spent.
         'Assert.AreEqual("hurt|more hurt|most hurt", inflector.GetAdjectiveInflections("hurt", AdjectiveForm.Base))
         'Assert.AreEqual("lost|more lost|most lost", inflector.GetAdjectiveInflections("lost", AdjectiveForm.Base))
+        'Assert.AreEqual("worn|more worn|most worn", inflector.GetAdjectiveInflections("worn", AdjectiveForm.Base))
+        Assert.AreEqual("bored|more bored|most bored", inflector.GetAdjectiveInflections("bored", AdjectiveForm.Base))
+        Assert.AreEqual("broken|more broken|most broken", inflector.GetAdjectiveInflections("broken", AdjectiveForm.Base))
+        Assert.AreEqual("cooked|more cooked|most cooked", inflector.GetAdjectiveInflections("cooked", AdjectiveForm.Base))
+        Assert.AreEqual("flawed|more flawed|most flawed", inflector.GetAdjectiveInflections("flawed", AdjectiveForm.Base))
+        Assert.AreEqual("known|better known|best known", inflector.GetAdjectiveInflections("known", AdjectiveForm.Base))
     End Sub
 
     <TestMethod()>
