@@ -1,18 +1,21 @@
+# don't put any lines containing 'more' above many/much
+many,more,most
+much,more,most
+#
 bad,worse,worst
 far,farther,farthest
-fun,more fun,most fun
 good,better,best
 hind,hinder,hindmost
 ill,worse,worst
 less,lesser,least
 little,less,least
-many,more,most
-much,more,most
 stupid,stupider,stupidest
 well,better,best
+known,better known,best known
+# Keep the more/most irregulars at the end of the file
+fun,more fun,most fun
 hostile,more hostile,most hostile
 sterile,more sterile,most sterile
 worthwhile,more worthwhile,most worthwhile
 wholesale,more wholesale,most wholesale
-known,better known,best known
 

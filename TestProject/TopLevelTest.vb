@@ -133,7 +133,7 @@ Public Class TopLevelTest
 
     <TestMethod()>
     Public Sub TestTwoSyllableExceptions()
-        ' TODO two syllable quiet, narrow, clever need a fix
+        ' TODO Find a way to code for these two syllable words. Currently "quiet", "narrow", "clever" use more/most
         'Assert.AreEqual("quiet|quieter|quietest", inflector.GetAdjectiveInflections("quiet", AdjectiveForm.Base))
         'Assert.AreEqual("narrow|narrower|narrowest", inflector.GetAdjectiveInflections("narrow", AdjectiveForm.Base))
         'Assert.AreEqual("clever|cleverer|cleverest", inflector.GetAdjectiveInflections("clever", AdjectiveForm.Base))
@@ -246,7 +246,7 @@ Public Class TopLevelTest
 
     <TestMethod()>
     Public Sub TestOneSyllablePastParticiplesMoonlightingAsAdjectives()
-        ' TODO we have no code for these, and grown, spent.
+        ' TODO "hurt", "lost", "worn", "grown", "spent" don't work.  They're really past participles.  No idea how to code for these.
         'Assert.AreEqual("hurt|more hurt|most hurt", inflector.GetAdjectiveInflections("hurt", AdjectiveForm.Base))
         'Assert.AreEqual("lost|more lost|most lost", inflector.GetAdjectiveInflections("lost", AdjectiveForm.Base))
         'Assert.AreEqual("worn|more worn|most worn", inflector.GetAdjectiveInflections("worn", AdjectiveForm.Base))
@@ -267,10 +267,14 @@ Public Class TopLevelTest
     Public Sub TestManyAndMuch()
         Assert.AreEqual("many|more|most", inflector.GetAdjectiveInflections("many", AdjectiveForm.Base))
         Assert.AreEqual("much|more|most", inflector.GetAdjectiveInflections("much", AdjectiveForm.Base))
+    End Sub
 
-        ' TODO fix bug. Much and Many both have a comparative of more.  This fails badly and returns "fun|more fun|most fun"!
-        'Assert.AreEqual("many|more|most", inflector.GetAdjectiveInflections("more", AdjectiveForm.Comparative))
-        'Assert.AreEqual("many|more|most", inflector.GetAdjectiveInflections("more"))
+    <TestMethod()>
+    Public Sub TestMore()
+        ' This can fail badly if irregularAdjectives.txt has a line with "more" in it above the lines for many|more|most etc.
+        ' Check the file order
+        Assert.AreEqual("many|more|most", inflector.GetAdjectiveInflections("more", AdjectiveForm.Comparative))
+        Assert.AreEqual("many|more|most", inflector.GetAdjectiveInflections("more"))
     End Sub
 
     ' Run against the whole list of adjectives.  Then paste the output into MS Word and let spell-checker look for funnies.

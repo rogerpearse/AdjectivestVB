@@ -1,4 +1,6 @@
-﻿Imports System
+﻿Option Explicit On
+Option Strict On
+Imports System
 Imports System.IO
 Imports Adjectivest.Phonemes
 Imports System.Runtime.InteropServices
@@ -106,65 +108,45 @@ Public Class AdjectiveInflector
         Return word + "|" + comparative + "|" + superlative
     End Function
 
-    ''' <summary>
-    ''' This does not appear to be called from anywhere.
-    ''' </summary>
     Public Function IsKnownIrregular(ByVal word As String, _
-                                     <Out()> ByRef comparative As String, _
-                                     <Out()> ByRef superlative As String) As Boolean
-        comparative = Nothing
-        superlative = Nothing
-
-        For i = 0 To irregularAdjectives.Length - 1
-            Dim irregular = irregularAdjectives(i)
-
-            If irregular.StartsWith(word) Then
-                Dim splitIrregular = irregular.Split(commaDelimiter)
-                comparative = splitIrregular(1)
-                superlative = splitIrregular(2)
-                Return True
-            End If
-        Next
-
-        Return False
-    End Function
-
-    Public Function IsKnownIrregular(ByVal word As String, _
-                                     <Out()> ByRef form As AdjectiveForm, _
-                                     <Out()> ByRef baseForm As String, _
-                                     <Out()> ByRef comparative As String, _
-                                     <Out()> ByRef superlative As String) As Boolean
+                                     ByRef form As AdjectiveForm, _
+                                     ByRef baseForm As String, _
+                                     ByRef comparative As String, _
+                                     ByRef superlative As String) As Boolean
         baseForm = Nothing
         comparative = Nothing
         superlative = Nothing
         form = AdjectiveForm.None
 
         For i = 0 To irregularAdjectives.Length - 1
-            Dim irregular = irregularAdjectives(i)
+            Dim irregular As String = irregularAdjectives(i)
 
-            If irregular.Contains(word) Then
-                Dim splitIrregular = irregular.Split(commaDelimiter)
-                baseForm = splitIrregular(0)
-                comparative = splitIrregular(1)
-                superlative = splitIrregular(2)
+            ' Ignore comments
+            If irregular.StartsWith("#") Then Continue For
 
-                For j = 0 To splitIrregular.Length - 1
-                    If splitIrregular(j) = word Then
-                        Select Case j
-                            Case 0
-                                form = AdjectiveForm.Base
-                            Case 1
-                                form = AdjectiveForm.Comparative
-                            Case 2
-                                form = AdjectiveForm.Superlative
-                            Case Else
-                                form = AdjectiveForm.None
-                        End Select
-                    End If
-                Next
+            If Not irregular.Contains(word) Then Continue For
 
-                Return True
-            End If
+            Dim splitIrregular As String() = irregular.Split(commaDelimiter)
+            baseForm = splitIrregular(0)
+            comparative = splitIrregular(1)
+            superlative = splitIrregular(2)
+
+            For j = 0 To splitIrregular.Length - 1
+                If splitIrregular(j) = word Then
+                    Select Case j
+                        Case 0
+                            form = AdjectiveForm.Base
+                        Case 1
+                            form = AdjectiveForm.Comparative
+                        Case 2
+                            form = AdjectiveForm.Superlative
+                        Case Else
+                            form = AdjectiveForm.None
+                    End Select
+                End If
+            Next
+
+            Return True
         Next
 
         Return False
@@ -361,18 +343,16 @@ Public Class AdjectiveInflector
     End Function
 
     ''' <summary>
-    ''' Double last consonant, but not if already doubled, or a digraph, or other rules
+    ''' Decide if we need to double the last consonstant.
     ''' </summary>        
     Public Function doWeDoubleLastConsonant(finalValue As String, _
                                             lastConsonantDoubleOnShortVowel As Boolean, _
                                             lastConsonantFormation As ConsonantFormation, _
                                             isLastConsonantPhoneme As Boolean) As Boolean
 
+        ' TODO remove original Adjectivest code that didn't really work.
         'If lastConsonantDoubleOnShortVowel = False Then Return False
-
         'If isLastConsonantPhoneme AndAlso lastConsonantFormation = ConsonantFormation.Digraph Then Return False
-
-        ' This has been frigged for tall
         'If endsInNonDigraphicDualConsonant Then Return False
 
         '-- Last three chars.  If shorter then we can't do much.  Coded from

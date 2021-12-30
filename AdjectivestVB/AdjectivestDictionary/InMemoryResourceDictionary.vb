@@ -24,6 +24,7 @@ Public Class InMemoryResourceDictionary
     End Function
 
     Public Overrides Function AdjectivesListContainsWord(ByVal word As String) As Boolean
+
         Dim first As Char = word(0)
         Dim startIndex As Integer = adjectivesListLetterIndices(first)
         Try
@@ -39,7 +40,6 @@ Public Class InMemoryResourceDictionary
 
             Return False
         Catch ex As Exception
-            ' TODO ought to have better
             Return False
         End Try
 
